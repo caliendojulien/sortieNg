@@ -1,0 +1,17 @@
+.inputs, .submit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  overflow: auto;
+  flex-direction: row;
+}
+
+.inputs mat-form-field {
+  margin: 25px 10px 10px;
+}
+
+.submit button {
+  margin: 25px;
+}

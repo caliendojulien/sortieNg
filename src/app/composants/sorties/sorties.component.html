@@ -1,0 +1,132 @@
+<!--<div class="container ml-0 mr-0 pl-0 pr-0">-->
+<!--  <form name="event_search" method="get" class="row">-->
+<!--    <div class="col col-sm-3 d-flex flex-column justify-content-end">-->
+<!--      <div class="form-group"><label class="" for="event_search_school_site">Site</label><select-->
+<!--        id="event_search_school_site" name="event_search[school_site]" class="form-control-sm form-control">-->
+<!--        <option value=""></option>-->
+<!--        <option value="1">La-Roche-Sur-Yon</option>-->
+<!--        <option value="2">Nantes</option>-->
+<!--        <option value="3">Rennes</option>-->
+<!--        <option value="4">Niort</option>-->
+<!--        <option value="5">La-Roche-Sur-Yon</option>-->
+<!--        <option value="6">Nantes</option>-->
+<!--        <option value="7">Rennes</option>-->
+<!--        <option value="8">Niort</option>-->
+<!--      </select></div>-->
+<!--      <div class="form-group"><label for="event_search_keyword">Mots-clefs</label><input type="search"-->
+<!--                                                                                         id="event_search_keyword"-->
+<!--                                                                                         name="event_search[keyword]"-->
+<!--                                                                                         class="form-control-sm form-control"/>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col col-sm-3 d-flex flex-column justify-content-end">-->
+<!--      <div class="form-group"><label for="event_search_start_at_min_date" class="required">Entre le</label><input-->
+<!--        type="text" id="event_search_start_at_min_date" name="event_search[start_at_min_date]" required="required"-->
+<!--        class="form-control-sm form-control" value="22/01/2023"/></div>-->
+<!--      <div class="form-group"><label for="event_search_start_at_max_date" class="required">Et le</label><input-->
+<!--        type="text" id="event_search_start_at_max_date" name="event_search[start_at_max_date]" required="required"-->
+<!--        class="form-control-sm form-control" value="22/02/2024"/></div>-->
+<!--    </div>-->
+<!--    <div class="col col-sm-4 d-flex flex-column justify-content-start event-filters-checkboxes">-->
+<!--      <h5>Inclure...</h5>-->
+<!--      <div class="form-group">-->
+<!--        <div class="form-check"><input type="checkbox" id="event_search_is_organizer" name="event_search[is_organizer]"-->
+<!--                                       class="form-check-input" value="1" checked="checked"/>-->
+<!--          <label class="form-check-label" for="event_search_is_organizer">Sorties dont je suis-->
+<!--            l&#039;organisateur</label></div>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <div class="form-check"><input type="checkbox" id="event_search_subscribed_to"-->
+<!--                                       name="event_search[subscribed_to]" class="form-check-input" value="1"-->
+<!--                                       checked="checked"/>-->
+<!--          <label class="form-check-label" for="event_search_subscribed_to">Sorties auxquelles je suis inscrit</label>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <div class="form-check"><input type="checkbox" id="event_search_not_subscribed_to"-->
+<!--                                       name="event_search[not_subscribed_to]" class="form-check-input" value="1"-->
+<!--                                       checked="checked"/>-->
+<!--          <label class="form-check-label" for="event_search_not_subscribed_to">Sorties auxquelles je ne suis pas-->
+<!--            inscrit</label></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col col-sm d-flex flex-column justify-content-end">-->
+<!--      <div class="form-group">-->
+<!--        <button type="submit" id="event_search_submit" name="event_search[submit]" class="btn-primary btn">GO</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+
+<!--<table class="table table-striped table-sm event-table">-->
+<!--  <tr>-->
+<!--    <th>Intitulé</th>-->
+<!--    <th>Statut</th>-->
+<!--    <th class="d-none d-lg-table-cell">Inscrits</th>-->
+<!--    <th class="d-none d-md-table-cell">Places restantes</th>-->
+<!--    <th class="d-none d-md-table-cell">Date de début</th>-->
+<!--    <th class="d-none d-lg-table-cell">Organisé par</th>-->
+<!--    <th>Action</th>-->
+<!--  </tr>-->
+<!--  <tr>-->
+<!--    <td><a href="/sorties/details/260">Le confort de concrétiser vos projets de manière sûre</a></td>-->
+<!--    <td>Fermée</td>-->
+<!--    <td class="d-none d-lg-table-cell">8</td>-->
+<!--    <td class="d-none d-md-table-cell">16 / 24</td>-->
+<!--    <td class="d-none d-md-table-cell">27-02-2023 à 04:19</td>-->
+<!--    <td class="d-none d-lg-table-cell">-->
+<!--      <a href="/profil/21" title="Voir son profil">Valérie N (Rennes)</a>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--</table>-->
+<div class="mat-elevation-z8 sorties">
+  <div class="loading" *ngIf="chargement">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!chargement">
+    <table mat-table [dataSource]="donnees" matSort>
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef>sortie</th>
+        <td mat-cell *matCellDef="let sortie">{{sortie.nom}}</td>
+      </ng-container>
+      <ng-container matColumnDef="debut">
+        <th mat-header-cell *matHeaderCellDef>Programmé le</th>
+        <td mat-cell *matCellDef="let sortie">{{sortie.debut | date:'dd/MM/YYYY à HH:MM'}}</td>
+      </ng-container>
+      <ng-container matColumnDef="duree">
+        <th mat-header-cell *matHeaderCellDef>Pour</th>
+        <td mat-cell *matCellDef="let sortie">{{sortie.duree}} minutes</td>
+      </ng-container>
+      <ng-container matColumnDef="limite">
+        <th mat-header-cell *matHeaderCellDef>Date de fin d'inscription</th>
+        <td mat-cell *matCellDef="let sortie">{{sortie.limiteInscription | date:'dd/MM/YYYY à HH:MM'}}</td>
+      </ng-container>
+      <ng-container matColumnDef="max">
+        <th mat-header-cell *matHeaderCellDef>Capacité maximale</th>
+        <td mat-cell *matCellDef="let sortie">{{sortie.participantsMax}}</td>
+      </ng-container>
+      <ng-container matColumnDef="infos">
+        <th mat-header-cell *matHeaderCellDef>Informations</th>
+        <td mat-cell *matCellDef="let sortie">{{sortie.informations}}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let sortie">boutons</td>
+      </ng-container>
+      <ng-container>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="7">Aucune sortie a afficher</td>
+        </tr>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="colonnes"></tr>
+      <tr mat-row *matRowDef="let sortie; columns: colonnes;"></tr>
+    </table>
+    <mat-paginator
+      [length]="donnees.length"
+      [pageSize]="30">
+    </mat-paginator>
+  </div>
+</div>
+

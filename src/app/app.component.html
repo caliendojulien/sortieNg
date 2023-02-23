@@ -1,0 +1,30 @@
+<p>
+  <mat-toolbar color="primary">
+    <span>
+      <a class="home-main-link" routerLink="/"><img src="assets/img/favicon.png" alt="sortir.com logo"></a>
+    </span>
+    <span class="barre-de-nav-espace"></span>
+    <span><a routerLink="/sorties">
+      <button mat-icon-button matTooltip="Les sorties" matBadge="15" matBadgeColor="warn"><mat-icon>output</mat-icon></button>
+      </a></span>
+    <span><a routerLink="/creer-sortie">
+              <button mat-icon-button matTooltip="Nouvelle sortie"><mat-icon>library_add</mat-icon></button>
+      </a></span>
+    <span class="barre-de-nav-espace"></span>
+    <span><a routerLink="/profil">BOB</a></span>
+    <span><a routerLink="/bo">
+      <button mat-icon-button matTooltip="Administration"><mat-icon>star</mat-icon></button>
+    </a></span>
+    <span><a routerLink="/deco">
+      <button mat-icon-button matTooltip="Se déconnecter"><mat-icon>logout</mat-icon></button>
+    </a></span>
+    <span><a routerLink="/co">
+       <button mat-icon-button matTooltip="Se connecter"><mat-icon>login</mat-icon></button>
+    </a></span>
+  </mat-toolbar>
+</p>
+<main>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
