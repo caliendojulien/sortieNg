@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AccueilComponent} from './composants/accueil/accueil.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CoComponent} from './composants/co/co.component';
 import {SortiesComponent} from './composants/sorties/sorties.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -21,6 +21,8 @@ import {Paginator} from "./modeles/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSortModule} from "@angular/material/sort";
+import {AuthInterceptor} from "./interceptor/auth.interceptor";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -45,10 +47,16 @@ import {MatSortModule} from "@angular/material/sort";
     MatPaginatorModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule
   ],
   providers: [
-    {provide: MatPaginatorIntl, useClass: Paginator}
+    {provide: MatPaginatorIntl, useClass: Paginator},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

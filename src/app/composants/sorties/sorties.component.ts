@@ -38,10 +38,8 @@ export class SortiesComponent implements AfterViewInit {
   public ngAfterViewInit(): void {
     this.api.getSorties().subscribe(
       data => {
-        setTimeout(() => {
-          this.donnees = data["hydra:member"];
-          this.chargement = false;
-        }, 5000);
+        this.donnees = data["hydra:member"];
+        this.chargement = false;
       }
     );
   }
